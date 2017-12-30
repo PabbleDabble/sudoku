@@ -8,11 +8,12 @@ function makePuzzle(){
     
     // Clear the previous html
     $('#puzzleContainer').html('');
+    $('#possibleContainer').html('');
     
-    showMessage('Making Puzzle');
+    showMessage('Making Puzzle (Rand:' +  parseInt(Math.random() * 100) + ')');
     
     var puzzleHTML = '';
-    puzzleHTML += '<table>';
+    puzzleHTML += '<table class="bigTable">';
 
     for (var i = 0; i < MAXSIZE; i++){
         
@@ -44,9 +45,12 @@ function makePuzzle(){
                 puzzleHTML += '</td>';
             }
 
-            puzzleHTML += '<td id="r' + (i-1).toString() + 'c' + (j-1).toString() + '" ';
-            puzzleHTML += ' data-rowIndex='+ parseInt(i-1);
-            puzzleHTML += ' data-colIndex='+ parseInt(j-1);
+            puzzleHTML += '<td id="';
+            puzzleHTML += 'r' + (i).toString();
+            puzzleHTML += 'c' + (j).toString();
+            puzzleHTML += '" ';
+            puzzleHTML += ' data-rowIndex='+ parseInt(i);
+            puzzleHTML += ' data-colIndex='+ parseInt(j);
             puzzleHTML += ' class="pixel"';
             puzzleHTML += '>';                    
             // This is what is inside the empty cells
@@ -58,6 +62,7 @@ function makePuzzle(){
     }
     puzzleHTML += '</table>';
     $('#puzzleContainer').html(puzzleHTML);
+    $('#possibleContainer').html(puzzleHTML);
     
 }
 
@@ -66,37 +71,54 @@ function makePuzzle(){
 
 
 function displaySolution(solution){
+    clearSolution();
     zzSln = solution;
     zzCells = solution.cellData;
-    zzClues = solution.clueData;
+    zzPoss = solution.cellPoss;
+    showMessage('Displaying Solution (Rand:' +  parseInt(Math.random() * 100) + ')');
 
-    var pixels = solution.cellData.length;
-    var size = Math.sqrt(pixels);
-
-    if (parseInt(size) !== size){
-        showMessage('Incorrect solution size');
-    }
-    clearSolution();
-    for (var i = 0; i < size; i++){
-        if (solution.clueData['c'][i].isComplete){
-            $('td#col' + i).addClass('COMPLETE');
-        }
-        if (solution.clueData['r'][i].isComplete){
-            $('td#row' + i).addClass('COMPLETE');
-        }
-
-        for (var j = 0; j < size; j++){
-            var xTemp = solution.cellData[i*size + j].val;
-            if (xTemp == solutionYes){
-                $('#r' + i + 'c' + j + '.pixel').addClass('YES');
-            } else if (xTemp == solutionNo){
-                $('#r' + i + 'c' + j + '.pixel').addClass('NO');
+    for (var i = 0; i < MAXSIZE; i++){
+        for (var j = 0; j < MAXSIZE; j++){
+            var cellID = '#r' + i + 'c' + j;
+            var bigIndex = i * 9 + j;
+            if (zzCells[bigIndex]) {
+                $('#puzzleContainer ' + cellID).html(zzCells[bigIndex]);
+                $('#puzzleContainer ' + cellID).addClass('originalHint');
             }
+            else {
+                var blankCount = occurrence(zzPoss[bigIndex],'');
+                if (blankCount == 9){
+                    // This should never happen within this lower else
+                    debugger;
+                }
+                else {
+                    $('#possibleContainer ' + cellID).html(makePossibleTable(zzPoss[bigIndex]));
+                }
+            }
+
         }
     }
 }
 function clearSolution(){
-    $('.clueCell').removeClass('COMPLETE');
-    $('.pixel').removeClass('YES');
-    $('.pixel').removeClass('NO');
+    $('#puzzleContainer').removeClass('originalHint');
+}
+function makePossibleTable(arr){
+    var htmlString = "";
+    if (arr.length != 9)
+        debugger;
+
+    htmlString += '<div class="possDivTable">';
+    htmlString += '<table class="smallTable">';
+    for (var i = 0; i < 3; i++){
+        htmlString += '<tr>';
+        for (var j = 0; j < 3; j++){
+            htmlString += '<td>';
+            htmlString += arr[i * 3 + j];
+            htmlString += '</td>';
+        }
+        htmlString += '</tr>';
+    }
+    htmlString += '</table>';
+    htmlString += '</div>';
+    return htmlString;
 }

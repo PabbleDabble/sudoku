@@ -1,53 +1,60 @@
-#puzzleContainer table {
+.tableContainer table {
     border-spacing: 0px;
 }
-#puzzleContainer td {
-    width: 25px;
-    height: 25px;
+.tableContainer table.bigTable > tbody > tr > td {
+    width: 35px;
+    height: 35px;
     text-align: center;
 }
-
-#puzzleContainer table td {
+.tableContainer table.bigTable > tbody > tr > td {
     border: solid;
     border-width: 1px;
     border-top: none;
     border-left: none;
 }
 /* Get rid of the border on the first row */
-#puzzleContainer table tr:first-child td{
+.tableContainer table.bigTable tr:first-child td{
     border-left: none;
     border-right: none;
 }
 /* Get rid of borders on the first column */
-#puzzleContainer table td:first-child{
+.tableContainer table.bigTable td:first-child{
     border-top: none;
     border-bottom: none;
 }   
 /* The column groups */
-#puzzleContainer table tr td:nth-child(3n+1){
-    border-right-width: 2px !important;
+.tableContainer table.bigTable tr td:nth-child(3n+1){
+    border-right-width: 2px;
 }
 /* The row groups */
-#puzzleContainer table tr:nth-child(3n+1) td{
-    border-bottom-width: 2px !important;
+.tableContainer table.bigTable tr:nth-child(3n+1) td{
+    border-bottom-width: 2px;
+}
+.tableContainer table.smallTable > tbody > tr > td {
+    border: none;
+    font-size: 6pt;
 }
 
+
+.originalHint{
+    background-color: lightblue;
+}
 
 
 @media(false){
 
     /* Get right of the top and left borders on the table */
-    #puzzleContainer table {
+    .tableContainer table {
         border-top: none;
         border-left: none;
     }
 
     /* The most right column... */
-    #puzzleContainer table tr td:last-child{
+    .tableContainer table tr td:last-child{
         border-right-width: 2px;
     }
     /* The bottom row */
-    #puzzleContainer table tr:last-child td{
+    .tableContainer table tr:last-child td{
         border-bottom-width: 2px;
     }
 

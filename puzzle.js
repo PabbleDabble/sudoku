@@ -8,15 +8,15 @@
 // https://rawgit.com/PabbleDabble/puzzleCross/master/index.html
 
  
-var puzzleID = 'PUZZ_0001';
+var puzzleID = 'PUZZ_0002';
 var breakString = '<br/>';
 var MAXSIZE = 9;
 var solutionDunno = 0;
 
 // Console globals - Read only to console / debugging
-var zzSln = [];
+var zzSln = {};
 var zzCells = [];
-var zzClues = []
+var zzPoss = []
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
@@ -34,11 +34,11 @@ $(document).ready(function(){
 
 
     // This is the first thing you do to make the puzzle
-    var solutionObject = initializeSolution();
+    var solutionObject = initializeSolution(puzzleID);
     console.log(solutionObject);
     
-    displaySolution(solution);
-    solvePuzzle();
+    displaySolution(solutionObject);
+    solvePuzzle(solutionObject);
 
 });
 
@@ -48,16 +48,9 @@ $(document).ready(function(){
 
 
 
+function solvePuzzle(solutionObject){
+    showMessage('Solving Puzzle (Rand:' +  parseInt(Math.random() * 100) + ')');
 
-
-function solvePuzzle(){
-
-
-    return; 
-    // This is the first thing you do to solve the puzzle
-    var solutionObject = initializeSolution('blank');
-    var clues = solutionObject.clueData;
-    var size = clues['c'].length;
     var doCounter = 1;
 
     // [1,2].concat([3,4]); = [1,2,3,4]
@@ -67,6 +60,10 @@ function solvePuzzle(){
     // var test =[1,2,3,4,5]; test.unshift(9,8); // test then is [9.8.1.2.3.4.5] // pre-pend
 
     // XX - Start solve loop
+    console.log('No logics implemented yet');
+    return;
+
+
     solutionObject = initialFullLine('r', solutionObject);
     solutionObject = initialFullLine('c', solutionObject);
     solutionObject = singleValueMoreThanHalf('r', solutionObject);

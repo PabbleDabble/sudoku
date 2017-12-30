@@ -11,6 +11,7 @@
     <script type="text/javascript" src="logics.js"></script>
     <script type="text/javascript" src="puzzleTools.js"></script>
     <script type="text/javascript" src="displayTools.js"></script>
+    <script type="text/javascript" src="arrayTools.js"></script>
     <script type="text/javascript" src="debugger.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -32,23 +33,18 @@
     <!-- All of these divs should have id from the TOP LEFT of the 20x20 puzzle on the iPad -->
     <!-- The get clues gets the first div with class clueDiv` -->
     <div id="PUZZ_0001" class="clueDiv" style='display:none;'>
-        123456789
-        000000000
-        000000000
-        
-        000000000
-        000000000
-        000000000
-        
-        000000000
-        000000000
-        000000000
+        123456789000000000000000000000000000000000000000000000000000000000000000000000000
+    </div>
+    <div id="PUZZ_0002" class="clueDiv" style='display:none;'>
+        010020300004005060070000008006900070000100002030048000500006040000800106008000000
     </div>
 
 
 
 
-    <div id="puzzleContainer">
+    <div id="puzzleContainer" class="tableContainer">
+    </div>
+    <div id="possibleContainer" class="tableContainer">
     </div>
 
 </body>
