@@ -4,6 +4,7 @@ function initializeSolution(divID){
         divID = $(".clueDiv").first().attr('id');
 
     var puzzleString = $('#' + divID).html();
+    var puzzleString = '000123000040050060000000000700000003460080052500000001000000000090060040000392000';
     puzzleString = puzzleString.trim();
     puzzleString = puzzleString.replace(/\s/g,'');
     puzzleString = puzzleString.replace(/\n/g,'');
@@ -12,11 +13,12 @@ function initializeSolution(divID){
     if (puzzleString.length != 81)
         debugger;
 
-    var solution = {cellData: [], cellPoss: []};
+    var solution = {cellData: [], cellPoss: [], possChecked: []};
     // var fullPoss = [1,2,3,4,5,6,7,8,9];
 
     for (var i = 0; i < puzzleString.length; i++){
         var xVal = parseInt(puzzleString.substring(i,i+1));
+        solution.possChecked.push(false);
         if (xVal != solutionDunno){
             solution.cellData.push(xVal);
             solution.cellPoss.push('');

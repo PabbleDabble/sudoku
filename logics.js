@@ -15,11 +15,13 @@ function functionTemplate(solution){
 function removePossibilities(solution){
     var cells = solution.cellData;
     var poss = solution.cellPoss;
+    var checked = solution.possChecked;
     for (var i = 0; i < MAXSIZE; i++){
         for (var j = 0; j < MAXSIZE; j++){
             var bigIndex = i * 9 + j;
             var removeVal = cells[bigIndex];
-            if (removeVal != solutionDunno){
+            if (removeVal != solutionDunno && checked[bigIndex] == false){
+                checked[bigIndex] = true;
                 for (var k = 0; k < MAXSIZE; k++){
                     var littleIndex = i * 9 + k;
                     var findRemoveLoc = poss[littleIndex].indexOf(removeVal)
@@ -32,6 +34,19 @@ function removePossibilities(solution){
                     var findRemoveLoc = poss[littleIndex].indexOf(removeVal)
                     if (findRemoveLoc != -1){
                         poss[littleIndex].splice(findRemoveLoc,1);
+                    }
+                }
+                var nondentRowS = parseInt(i / 3) * 3;
+                var nondentRowE = nondentRowS + 3;
+                var nondentColS = parseInt(j / 3) * 3;
+                var nondentColE = nondentColS + 3;
+                for (var k = nondentRowS; k < nondentRowE; k++){
+                    for (var m = nondentColS; m < nondentColE; m++){
+                        var littleIndex = k * 9 + m;
+                        var findRemoveLoc = poss[littleIndex].indexOf(removeVal)
+                        if (findRemoveLoc != -1){
+                            poss[littleIndex].splice(findRemoveLoc,1);
+                        }
                     }
                 }
             }

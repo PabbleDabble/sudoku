@@ -79,6 +79,7 @@ function displaySolution(solution){
     zzSln = solution;
     zzCells = solution.cellData;
     zzPoss = solution.cellPoss;
+    zzChecked = solution.possChecked;
     showMessage('Displaying Solution (Rand:' +  parseInt(Math.random() * 100) + ')');
 
     for (var i = 0; i < MAXSIZE; i++){
