@@ -1,4 +1,60 @@
 /* -------------------- LOGICS -------------------- */
+function functionTemplate(solution){
+    var cells = solution.cellData;
+    var poss = solution.cellPoss;
+    for (var i = 0; i < MAXSIZE; i++){
+        for (var j = 0; j < MAXSIZE; j++){
+            var bigIndex = i * 9 + j;
+
+
+        }
+    }
+    return solution;
+}
+
+function removePossibilities(solution){
+    var cells = solution.cellData;
+    var poss = solution.cellPoss;
+    for (var i = 0; i < MAXSIZE; i++){
+        for (var j = 0; j < MAXSIZE; j++){
+            var bigIndex = i * 9 + j;
+            var removeVal = cells[bigIndex];
+            if (removeVal != solutionDunno){
+                for (var k = 0; k < MAXSIZE; k++){
+                    var littleIndex = i * 9 + k;
+                    var findRemoveLoc = poss[littleIndex].indexOf(removeVal)
+                    if (findRemoveLoc != -1){
+                        poss[littleIndex].splice(findRemoveLoc,1);
+                    }
+                }
+                for (var k = 0; k < MAXSIZE; k++){
+                    var littleIndex = k * 9 + j;
+                    var findRemoveLoc = poss[littleIndex].indexOf(removeVal)
+                    if (findRemoveLoc != -1){
+                        poss[littleIndex].splice(findRemoveLoc,1);
+                    }
+                }
+            }
+        }
+    }
+    return solution;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function functionTemplate(direction,solution){
     if (!direction || (direction != 'r' && direction != 'c'))
         debugger;

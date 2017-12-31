@@ -13,18 +13,20 @@ function initializeSolution(divID){
         debugger;
 
     var solution = {cellData: [], cellPoss: []};
-    var fullPoss = [1,2,3,4,5,6,7,8,9];
+    // var fullPoss = [1,2,3,4,5,6,7,8,9];
 
     for (var i = 0; i < puzzleString.length; i++){
         var xVal = parseInt(puzzleString.substring(i,i+1));
         if (xVal != solutionDunno){
             solution.cellData.push(xVal);
+            solution.cellPoss.push('');
         }
         else {
             solution.cellData.push('');
+            solution.cellPoss.push([1,2,3,4,5,6,7,8,9]);
         }
-        solution.cellPoss.push(fullPoss);
     }
+    solution.isUpdated = false;
     return solution;
 }
 

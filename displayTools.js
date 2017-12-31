@@ -71,6 +71,10 @@ function makePuzzle(){
 
 
 function displaySolution(solution){
+    var firstTimeDone = false;
+    if ($('#puzzleContainer td.originalHint').length == 0){
+        firstTimeDone = true;
+    }
     clearSolution();
     zzSln = solution;
     zzCells = solution.cellData;
@@ -83,11 +87,12 @@ function displaySolution(solution){
             var bigIndex = i * 9 + j;
             if (zzCells[bigIndex]) {
                 $('#puzzleContainer ' + cellID).html(zzCells[bigIndex]);
-                $('#puzzleContainer ' + cellID).addClass('originalHint');
+                $('#possibleContainer ' + cellID).html('');
+                if (firstTimeDone)
+                    $('#puzzleContainer ' + cellID).addClass('originalHint');
             }
             else {
-                var blankCount = occurrence(zzPoss[bigIndex],'');
-                if (blankCount == 9){
+                if (zzPoss[bigIndex].length == 0){
                     // This should never happen within this lower else
                     debugger;
                 }
@@ -104,8 +109,6 @@ function clearSolution(){
 }
 function makePossibleTable(arr){
     var htmlString = "";
-    if (arr.length != 9)
-        debugger;
 
     htmlString += '<div class="possDivTable">';
     htmlString += '<table class="smallTable">';
@@ -113,7 +116,14 @@ function makePossibleTable(arr){
         htmlString += '<tr>';
         for (var j = 0; j < 3; j++){
             htmlString += '<td>';
-            htmlString += arr[i * 3 + j];
+            var xVal = i * 3 + j + 1;
+            var xValLoc = arr.indexOf(xVal);
+            if (xValLoc == -1) {
+                htmlString += '-';
+            }
+            else {
+                htmlString += arr[xValLoc];
+            }
             htmlString += '</td>';
         }
         htmlString += '</tr>';

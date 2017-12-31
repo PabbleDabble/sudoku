@@ -1,4 +1,6 @@
 function occurrence(arr, compare, key) {
+    if (arr.length == 0)
+        return 0;
     var counter = 0;
     if (key){
         arr.forEach(function(item){

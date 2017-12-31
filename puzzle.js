@@ -32,7 +32,6 @@ $(document).ready(function(){
 
     makePuzzle();
 
-
     // This is the first thing you do to make the puzzle
     var solutionObject = initializeSolution(puzzleID);
     console.log(solutionObject);
@@ -52,7 +51,6 @@ function solvePuzzle(solutionObject){
     showMessage('Solving Puzzle (Rand:' +  parseInt(Math.random() * 100) + ')');
 
     var doCounter = 1;
-
     // [1,2].concat([3,4]); = [1,2,3,4]
     // [1,2,3,4].slice(2) = [3,4]   // 2 ending values
     // [1,2,3,4].slice(2,3) = [3,4]   // 2=begin, 3=end (not included)
@@ -60,24 +58,11 @@ function solvePuzzle(solutionObject){
     // var test =[1,2,3,4,5]; test.unshift(9,8); // test then is [9.8.1.2.3.4.5] // pre-pend
 
     // XX - Start solve loop
-    console.log('No logics implemented yet');
-    return;
-
-
-    solutionObject = initialFullLine('r', solutionObject);
-    solutionObject = initialFullLine('c', solutionObject);
-    solutionObject = singleValueMoreThanHalf('r', solutionObject);
-    solutionObject = singleValueMoreThanHalf('c', solutionObject);
-    
     do {
-        solutionObject.isUpdated = false;
-        console.log('Beginning solve loop: ' + doCounter);
-        doCounter++;
+        solutionObject = removePossibilities(solutionObject);
+        
         if (doCounter < 10){
-            solutionObject = lineComplete('r', solutionObject);
-            solutionObject = lineComplete('c', solutionObject);
-            solutionObject = edgeOfPuzzleIsYes('r', solutionObject);
-            solutionObject = edgeOfPuzzleIsYes('c', solutionObject);
+            doCounter++;
         }
         else {
             debugger;
